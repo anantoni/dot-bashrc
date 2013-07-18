@@ -91,6 +91,7 @@ alias ll='ls -al'
 alias la='ls -A'
 alias l='ls -CF'
 alias ..='cd ..'
+alias countlines='find * -type f -not -name ".*" | xargs wc -l'
 
 # Alias definitions.
 # You may want to put all your additions into a separate file like
