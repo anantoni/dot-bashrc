@@ -1,8 +1,10 @@
-export JAVA_HOME=/opt/java/jdk1.7.0_55
+export JAVA_HOME=/opt/java/jdk1.8.0_05
 export PATH=$PATH:$JAVA_HOME/bin/
 export PATH=$PATH:/home/anantoni/doop
 export LOGICBLOX_HOME=/home/anantoni/lb_engines/LogicBlox-3.9.0
 export DOOP_HOME=/home/anantoni/doop/
+export TERM=xterm-256color
+
 
 alias bloxbatch=$LOGICBLOX_HOME/bin/bloxbatch 
 alias home='cd /home/anantoni'
@@ -21,6 +23,7 @@ alias ....='cd ../../../../'
 alias .....='cd ../../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
+alias emacs='emacs -nw'
 
 ## Colorize the grep command output for ease of use (good for log files)##
 alias grep='grep --color=auto'
@@ -83,3 +86,6 @@ alias soot='java -cp /home/anantoni/soot/sootclasses-2.5.0.jar:/home/anantoni/so
 if [ $UID -ne 0 ]; then
     alias reboot='sudo reboot'
 fi
+
+#colors
+force_color_prompt=yes
