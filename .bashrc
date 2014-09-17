@@ -43,16 +43,16 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+        # We have color support; assume it's compliant with Ecma-48
+        # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+        # a case would tend to support setf rather than setaf.)
+        color_prompt=yes
     else
-	color_prompt=
+        color_prompt=
     fi
 fi
 
@@ -119,18 +119,18 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export JAVA_HOME=/opt/java/jdk1.8.0_05
-export PATH=$PATH:$JAVA_HOME/bin/
-export PATH=$PATH:/home/anantoni/doop
-export LOGICBLOX_HOME=/home/anantoni/lb_engines/LogicBlox-3.9.0
-export DOOP_HOME=/home/anantoni/doop/
+#export JAVA_HOME=/opt/java/jdk1.8.0_05
+export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre/
+export PATH=$JAVA_HOME/bin/:$PATH
+export PATH=$PATH:/home/anantoni/Dropbox/resources/doop/
+export LOGICBLOX_HOME=/home/anantoni/Dropbox/resources/lb_engines/LogicBlox-3.9.0
+export DOOP_HOME=/home/anantoni/Dropbox/resources/doop/
 export TERM=xterm-256color
+export LB_PAGER_FORCE_START=true
 
-
-alias bloxbatch=$LOGICBLOX_HOME/bin/bloxbatch 
+alias bloxbatch=$LOGICBLOX_HOME/bin/bloxbatch
 alias home='cd /home/anantoni'
-alias doop_home="cd /home/anantoni/doop"
-
+alias doop_home="cd /home/anantoni/Dropbox/resources/doop"
 
 ## a quick way to get out of current directory ##
 alias ..='cd ..'
