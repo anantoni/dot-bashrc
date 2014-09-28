@@ -120,17 +120,32 @@ if ! shopt -oq posix; then
 fi
 
 #export JAVA_HOME=/opt/java/jdk1.8.0_05
-export JAVA_HOME=/usr/lib/jvm/java-8-oracle/jre/
-export PATH=$JAVA_HOME/bin/:$PATH
-export PATH=$PATH:/home/anantoni/Dropbox/resources/doop/
-export LOGICBLOX_HOME=/home/anantoni/Dropbox/resources/lb_engines/LogicBlox-3.9.0
+export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
+
+#JAVA_HOME=${HOME}/Dropbox/resources/java/jdk1.8.0_20/
+#PATH=${JAVA_HOME}/bin/:${PATH}
+#JRE_HOME=$HOME/Dropbox/resources/java/jdk1.8.0_20/jre
+#PATH=${PATH}:${JRE_HOME}/bin
+JAVA_HOME=${HOME}/Dropbox/resources/java/jdk1.7.0_67/
+PATH=${JAVA_HOME}/bin/:${PATH}
+JRE_HOME=$HOME/Dropbox/resources/java/jdk1.7.0_67/jre
+PATH=${PATH}:${JRE_HOME}/bin
+PATH=${PATH}:${HOME}/Dropbox/resources/doop/
+PATH=${PATH}:/usr/local/apache-maven-3.2.3/bin
+
+export JAVA_HOME
+export JRE_HOME
+export PATH
+
+export IDEA_JDK=${JAVA_HOME}
+export LOGICBLOX_HOME=${HOME}/Dropbox/resources/lb_engines/LogicBlox-3.9.0
 export DOOP_HOME=/home/anantoni/Dropbox/resources/doop/
 export TERM=xterm-256color
 export LB_PAGER_FORCE_START=true
 
 alias bloxbatch=$LOGICBLOX_HOME/bin/bloxbatch
-alias home='cd /home/anantoni'
-alias doop_home="cd /home/anantoni/Dropbox/resources/doop"
+alias home='cd ${HOME}'
+alias doop_home="cd ${HOME}/Dropbox/resources/doop"
 
 ## a quick way to get out of current directory ##
 alias ..='cd ..'
