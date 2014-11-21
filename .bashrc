@@ -1,4 +1,5 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
+
+    # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
@@ -137,6 +138,10 @@ PATH=${JAVA_HOME}/bin/:${PATH}
 PATH=${PATH}:${JRE_HOME}/bin
 PATH=${PATH}:${DOOP_HOME}
 PATH=${PATH}:/usr/local/apache-maven-3.2.3/bin
+PATH=${PATH}:/opt/texbin/
+PATH=${PATH}:/usr/share/gradle-2.1/bin/
+PATH=${PATH}:/opt/aspectj1.8/bin
+CLASSPATH=/opt/aspectj1.8/lib/aspectjrt.jar
 
 export JAVA_HOME
 export JRE_HOME
