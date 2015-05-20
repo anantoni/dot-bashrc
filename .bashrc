@@ -2,6 +2,33 @@
     # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
+extract () {
+    if [ -f $1 ] ; then
+        case $1 in
+            *.tar.bz2)   tar xvjf $1    ;;
+            *.tar.gz)    tar xvzf $1    ;;
+            *.bz2)       bunzip2 $1     ;;
+            *.rar)       rar x $1       ;;
+            *.gz)        gunzip $1      ;;
+            *.tar)       tar xvf $1     ;;
+            *.tbz2)      tar xvjf $1    ;;
+            *.tgz)       tar xvzf $1    ;;
+            *.zip)       unzip $1       ;;
+            *.Z)         uncompress $1  ;;
+            *.7z)        7z x $1        ;;
+            *)           echo "don't know how to extract '$1'..." ;;
+        esac
+    else
+        echo "'$1' is not a valid file!"
+    fi
+    }
+
+source ~/.ssh-find-agent/ssh-find-agent.sh
+ssh-find-agent -a
+if [ -z "$SSH_AUTH_SOCK" ]; then
+    eval $(ssh-agent) > /dev/null
+    ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
+fi
 
 # If not running interactively, don't do anything
 case $- in
@@ -90,6 +117,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias cd..='cd ..'
 fi
 
+
 # some more ls aliases
 alias lss='clear;ls -l'
 alias ll='ls -alF'
@@ -126,38 +154,59 @@ export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
 export DOOP_HOME=/home/anantoni/doop/
 export TERM=xterm-256color
 
-source ~/lb_engines/logicblox-3.10.18/etc/profile.d/logicblox.sh
+source ~/lb-engines/logicblox-3.10.24/etc/profile.d/logicblox.sh
 alias home='cd ${HOME}'
 alias doop_home="cd ${HOME}/doop"
 
 JAVA_HOME=${HOME}/Dropbox/resources/java/jdk1.8.0_20/
-JRE_HOME=$HOME/Dropbox/resources/java/jdk1.8.0_20/jre
+#JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/
+#JRE_HOME=$HOME/Dropbox/resources/java/jdk1.8.0_20/jre
 #JAVA_HOME=${HOME}/Dropbox/resources/java/jdk1.7.0_67/
 PATH=${JAVA_HOME}/bin/:${PATH}
 #JRE_HOME=$HOME/Dropbox/resources/java/jdk1.7.0_67/jre
-PATH=${PATH}:${JRE_HOME}/bin
+#PATH=${PATH}:${JRE_HOME}/bin
 PATH=${PATH}:${DOOP_HOME}
 PATH=${PATH}:/usr/local/apache-maven-3.2.3/bin
 PATH=${PATH}:/opt/texbin/
 PATH=${PATH}:/usr/share/gradle-2.1/bin/
-PATH=${PATH}:/opt/aspectj1.8/bin
-CLASSPATH=/opt/aspectj1.8/lib/aspectjrt.jar
-
-export JAVA_HOME
-export JRE_HOME
+#export JAVA_HOME
+#export JRE_HOME
 export PATH
 
-export IDEA_JDK=${JAVA_HOME}
+
+# some more ls aliases
+alias ll='ls -alh'
+alias la='ls -A'
+alias l='ls -CFlh'
+alias woo='fortune'
+alias lsd="ls -alF | grep /$"
+
+# This is GOLD for finding out what is taking so much space on your drives!
+alias diskspace="du -S | sort -n -r |more"
+
+
+# Show me the size (sorted) of only the folders in this directory
+alias dirs="find . -maxdepth 1 -type d -print | xargs du -sk | sort -rn"
+
+# This will keep you sane when you're about to smash the keyboard again.
+alias frak="fortune"
+
+# This is where you put your hand rolled scripts (remember to chmod them)
+PATH="$HOME/bin:$PATH"
 
 ## a quick way to get out of current directory ##
 alias ..='cd ..'
-alias ...='cd ../../../'
-alias ....='cd ../../../../'
-alias .....='cd ../../../../'
+alias ...='cd ../../'
+alias ....='cd ../../../'
+alias .....='cd ../../../'
 alias .4='cd ../../../../'
 alias .5='cd ../../../../..'
+alias emacsd='emacs --daemon'
 alias emacs='emacs -nw'
-
+alias e='emacsclient -t'
+alias ec='emacsclient -c'
+alias vim='emacsclient -t'
+alias vi='emacsclient -t'
 ## Colorize the grep command output for ease of use (good for log files)##
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
