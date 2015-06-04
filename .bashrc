@@ -1,7 +1,8 @@
 
-    # ~/.bashrc: executed by bash(1) for non-login shells.
+# ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
+
 extract () {
     if [ -f $1 ] ; then
         case $1 in
@@ -22,13 +23,6 @@ extract () {
         echo "'$1' is not a valid file!"
     fi
     }
-
-source ~/.ssh-find-agent/ssh-find-agent.sh
-ssh-find-agent -a
-if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval $(ssh-agent) > /dev/null
-    ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
-fi
 
 # If not running interactively, don't do anything
 case $- in
@@ -85,16 +79,16 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 5)\]\w\[$(tput setaf 2)\][\[$(tput setaf 6)\]\t\[$(tput setaf 2)\]]\[$(tput setaf 2)\]\\$ \[$(tput sgr0)\]"
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+    export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 5)\]\w\[$(tput setaf 2)\][\[$(tput setaf 6)\]\t\[$(tput setaf 2)\]]\[$(tput setaf 2)\]\\$ \[$(tput sgr0)\]"
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
+    export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 5)\]\w\[$(tput setaf 2)\][\[$(tput setaf 6)\]\t\[$(tput setaf 2)\]]\[$(tput setaf 2)\]\\$ \[$(tput sgr0)\]"
     ;;
 *)
     ;;
@@ -151,12 +145,13 @@ fi
 #export JAVA_HOME=/opt/java/jdk1.8.0_05
 export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
 
-export DOOP_HOME=/home/anantoni/doop/
+export DOOP_HOME=/home/anantoni/doop-nexgen/
+export DOOP_PROJECT=doop-nexgen
 export TERM=xterm-256color
 
 source ~/lb-engines/logicblox-3.10.24/etc/profile.d/logicblox.sh
 alias home='cd ${HOME}'
-alias doop_home="cd ${HOME}/doop"
+alias doop_home="cd ${HOME}/doop-nexgen"
 
 JAVA_HOME=${HOME}/Dropbox/resources/java/jdk1.8.0_20/
 #JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/
