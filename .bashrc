@@ -23,13 +23,6 @@ extract () {
     fi
     }
 
-source ~/.ssh-find-agent/ssh-find-agent.sh
-ssh-find-agent -a
-if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval $(ssh-agent) > /dev/null
-    ssh-add -l >/dev/null || alias ssh='ssh-add -l >/dev/null || ssh-add && unalias ssh; ssh'
-fi
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
@@ -148,31 +141,28 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#export JAVA_HOME=/opt/java/jdk1.8.0_05
-export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
-
-export DOOP_HOME=/home/anantoni/doop/
 export TERM=xterm-256color
+
+# LB - DOOP related environment
+export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
+export DOOP_HOME=/home/anantoni/doop-nexgen/
+export DOOP_PROJECT=doop-nexgen
 
 source ~/lb-engines/logicblox-3.10.24/etc/profile.d/logicblox.sh
 alias home='cd ${HOME}'
-alias doop_home="cd ${HOME}/doop"
+alias doop_home="cd ${HOME}/doop-nexgen"
 
-JAVA_HOME=${HOME}/Dropbox/resources/java/jdk1.8.0_20/
-#JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64/
-#JRE_HOME=$HOME/Dropbox/resources/java/jdk1.8.0_20/jre
-#JAVA_HOME=${HOME}/Dropbox/resources/java/jdk1.7.0_67/
+#JAVA_HOME=${HOME}/Dropbox/resources/java/jdk1.8.0_20/
+JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-amd64
 PATH=${JAVA_HOME}/bin/:${PATH}
-#JRE_HOME=$HOME/Dropbox/resources/java/jdk1.7.0_67/jre
-#PATH=${PATH}:${JRE_HOME}/bin
+GRADLE_HOME=/opt/gradle-2.4
+MAVEN_HOME=/opt/apache-maven-3.3.3
 PATH=${PATH}:${DOOP_HOME}
-PATH=${PATH}:/usr/local/apache-maven-3.2.3/bin
-PATH=${PATH}:/opt/texbin/
-PATH=${PATH}:/usr/share/gradle-2.1/bin/
-#export JAVA_HOME
+PATH=${PATH}:${MAVEN_HOME}/bin/
+PATH=${PATH}:${GRADLE_HOME}/bin/
+export JAVA_HOME
 #export JRE_HOME
 export PATH
-
 
 # some more ls aliases
 alias ll='ls -alh'
