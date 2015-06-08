@@ -1,8 +1,7 @@
 
-# ~/.bashrc: executed by bash(1) for non-login shells.
+    # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
-
 extract () {
     if [ -f $1 ] ; then
         case $1 in
@@ -79,16 +78,16 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 5)\]\w\[$(tput setaf 2)\][\[$(tput setaf 6)\]\t\[$(tput setaf 2)\]]\[$(tput setaf 2)\]\\$ \[$(tput sgr0)\]"
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 5)\]\w\[$(tput setaf 2)\][\[$(tput setaf 6)\]\t\[$(tput setaf 2)\]]\[$(tput setaf 2)\]\\$ \[$(tput sgr0)\]"
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    export PS1="\[$(tput bold)\]\[$(tput setaf 5)\]\u\[$(tput setaf 2)\]@\[$(tput setaf 5)\]\w\[$(tput setaf 2)\][\[$(tput setaf 6)\]\t\[$(tput setaf 2)\]]\[$(tput setaf 2)\]\\$ \[$(tput sgr0)\]"
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
     ;;
@@ -142,12 +141,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-#export JAVA_HOME=/opt/java/jdk1.8.0_05
-export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
-
 export TERM=xterm-256color
 
 # LB - DOOP related environment
+export LD_LIBRARY_PATH=/usr/local/lib:${LD_LIBRARY_PATH}
 export DOOP_HOME=/home/anantoni/doop-nexgen/
 export DOOP_PROJECT=doop-nexgen
 
